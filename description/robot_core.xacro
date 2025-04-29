@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+     <!-- === Couleurs disponibles === -->
+  <material name="white">
+    <color rgba="1 1 1 1"/>
+  </material>
+
+  <material name="orange">
+    <color rgba="1 0.3 0.1 1"/>
+  </material>
+
+  <material name="blue">
+    <color rgba="0.2 0.2 1 1"/>
+  </material>
+
+  <material name="black">
+    <color rgba="0 0 0 1"/>
+  </material>
+  <!-- === Link racine : base_link === -->
+ <link name="base_link"/>
+
+   <!-- === Joint fixe entre base_link et chassis === -->
+<joint name="chassis_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="chassis"/>
+     <origin xyz="-0.1 0 0" rpy="0 0 0"/>
+  </joint>
+
+    <!-- === Châssis du robot === -->
+<link name="chassis">
+    <visual>
+      <origin xyz="0.125 0 0.035" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.25 0.18 0.07"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+  </link>
+
+
+  <!-- front LEFT WHEEL -->
+
+<joint name="wheel_front_left_joint" type="continuous">
+    <parent link="chassis"/>
+    <child link="wheel_front_left"/>
+    <origin xyz="0.225 0.1175 0.035" rpy="-${pi/2} 0 0"/>
+    <axis xyz="0 0 1"/>
+</joint>
+
+<link name="wheel_front_left">
+    <visual>
+        <geometry>
+            <cylinder length="0.055" radius="0.055"/>
+        </geometry>
+        <material name="orange"/>
+    </visual>
+</link>
+
+
+  <!-- front RIGHT WHEEL -->
+
+<joint name="wheel_front_right_joint" type="continuous">
+    <parent link="chassis"/>
+    <child link="wheel_front_right"/>
+    <origin xyz="0.225 -0.1175 0.035" rpy="${pi/2} 0 0"/>
+    <axis xyz="0 0 1"/>
+    
+</joint>
+
+<link name="wheel_front_right">
+    <visual>
+        <geometry>
+            <cylinder length="0.055" radius="0.055"/>
+        </geometry>
+        <material name="orange"/>
+    </visual>
+</link>
+
+<!-- Roue arrière gauche -->
+<joint name="wheel_rear_left_joint" type="continuous">
+    <parent link="chassis"/>
+    <child link="wheel_rear_left"/>
+    <origin xyz="0.025 0.1175 0.035" rpy="-${pi/2} 0 0"/>
+    <axis xyz="0 0 1"/>
+</joint>
+
+<link name="wheel_rear_left">
+    <visual>
+        <geometry>
+            <cylinder length="0.055" radius="0.055"/>
+        </geometry>
+        <material name="orange"/>
+    </visual>
+</link>
+
+<!-- Roue arrière droite -->
+<joint name="wheel_rear_right_joint" type="continuous">
+    <parent link="chassis"/>
+    <child link="wheel_rear_right"/>
+    <origin xyz="0.025 -0.1175 0.035" rpy="${pi/2} 0 0"/>
+    <axis xyz="0 0 1"/>
+</joint>
+
+<link name="wheel_rear_right">
+    <visual>
+        <geometry>
+            <cylinder length="0.055" radius="0.055"/>
+        </geometry>
+        <material name="orange"/>
+    </visual>
+</link>
+
+
+</robot>
