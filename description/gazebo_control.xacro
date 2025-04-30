@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="agri_bot_4wd_diffdrive">
+
+
+  <!-- === Front-wheel differential drive plugin for odometry === -->
+  <gazebo>
+    <plugin name="front_wheel" filename="libgazebo_ros_diff_drive.so">
+      <!-- Wheel Information -->
+      <left_joint>wheel_front_left_joint</left_joint>
+      <right_joint>wheel_front_right_joint</right_joint>
+      <wheel_separation>0.235</wheel_separation>
+      <wheel_diameter>0.11</wheel_diameter>
+
+      <!-- Limits -->
+      <max_wheel_torque>200</max_wheel_torque>
+      <max_wheel_acceleration>10.0</max_wheel_acceleration>
+
+      <!-- Output -->
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>true</publish_odom_tf>
+      <publish_wheel_tf>true</publish_wheel_tf>
+    </plugin>
+  </gazebo>
+
+  <!-- === Rear-wheel differential drive plugin for DC motors (no odometry) === -->
+  <gazebo>
+    <plugin name="rear_wheel" filename="libgazebo_ros_diff_drive.so">
+      <!-- Wheel Information -->
+      <left_joint>wheel_rear_left_joint</left_joint>
+      <right_joint>wheel_rear_right_joint</right_joint>
+      <wheel_separation>0.235</wheel_separation>
+      <wheel_diameter>0.11</wheel_diameter>
+
+      <!-- Limits -->
+      <max_wheel_torque>200</max_wheel_torque>
+      <max_wheel_acceleration>10.0</max_wheel_acceleration>
+
+      <!-- Output -->
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+      <publish_odom>false</publish_odom>
+      <publish_odom_tf>false</publish_odom_tf>
+      <publish_wheel_tf>true</publish_wheel_tf>
+    </plugin>
+  </gazebo>
+
+</robot>

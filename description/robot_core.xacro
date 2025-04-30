@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+<xacro:include filename="gazebo_control.xacro" />
+
 
      <!-- === Couleurs disponibles === -->
   <material name="white">
@@ -24,7 +26,7 @@
 <joint name="chassis_joint" type="fixed">
     <parent link="base_link"/>
     <child link="chassis"/>
-     <origin xyz="-0.1 0 0" rpy="0 0 0"/>
+     <origin xyz="0 0 0" rpy="0 0 0"/>
   </joint>
 
     <!-- === Châssis du robot === -->
@@ -36,16 +38,35 @@
       </geometry>
       <material name="black"/>
     </visual>
+      <collision>
+     <origin xyz="0.125 0 0.035" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.25 0.18 0.07"/>
+    </geometry>
+  </collision>
+
+  <inertial>
+  <origin xyz="0.125 0 0.035" rpy="0 0 0"/>
+    <mass value="1.0"/>
+    <inertia ixx="0.01" ixy="0.0" ixz="0.0"
+             iyy="0.01" iyz="0.0"
+             izz="0.01"/>
+  </inertial>
   </link>
+  <gazebo reference="chassis">
+    <material>Gazebo/Black</material>
+</gazebo>
 
 
   <!-- front LEFT WHEEL -->
 
 <joint name="wheel_front_left_joint" type="continuous">
-    <parent link="chassis"/>
+    <parent link="base_link"/>
     <child link="wheel_front_left"/>
-    <origin xyz="0.225 0.1175 0.035" rpy="-${pi/2} 0 0"/>
+    <origin xyz="0.225 0.1175 0.035" rpy="${-pi/2} 0 0"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="1.0" friction="1.0" />
+    <limit effort="10000" velocity="1000" />
 </joint>
 
 <link name="wheel_front_left">
@@ -55,17 +76,33 @@
         </geometry>
         <material name="orange"/>
     </visual>
+     <collision>
+    <geometry>
+      <cylinder length="0.055" radius="0.055"/>
+    </geometry>
+  </collision>
+
+  <inertial>
+    <mass value="0.2"/>
+    <inertia ixx="0.0001" ixy="0.0" ixz="0.0"
+             iyy="0.0001" iyz="0.0"
+             izz="0.0001"/>
+  </inertial>
 </link>
+  <gazebo reference="wheel_front_left">
+    <material>Gazebo/Red</material>
+</gazebo>
 
 
   <!-- front RIGHT WHEEL -->
 
 <joint name="wheel_front_right_joint" type="continuous">
-    <parent link="chassis"/>
+    <parent link="base_link"/>
     <child link="wheel_front_right"/>
     <origin xyz="0.225 -0.1175 0.035" rpy="${pi/2} 0 0"/>
-    <axis xyz="0 0 1"/>
-    
+    <axis xyz="0 0 -1"/>
+    <limit effort="10000" velocity="1000" />
+	    <dynamics damping="1.0" friction="1.0" />
 </joint>
 
 <link name="wheel_front_right">
@@ -75,14 +112,31 @@
         </geometry>
         <material name="orange"/>
     </visual>
+     <collision>
+    <geometry>
+      <cylinder length="0.055" radius="0.055"/>
+    </geometry>
+  </collision>
+
+  <inertial>
+    <mass value="0.2"/>
+    <inertia ixx="0.0001" ixy="0.0" ixz="0.0"
+             iyy="0.0001" iyz="0.0"
+             izz="0.0001"/>
+  </inertial>
 </link>
+  <gazebo reference="wheel_front_right">
+    <material>Gazebo/Red</material>
+</gazebo>
 
 <!-- Roue arrière gauche -->
 <joint name="wheel_rear_left_joint" type="continuous">
-    <parent link="chassis"/>
+    <parent link="base_link"/>
     <child link="wheel_rear_left"/>
     <origin xyz="0.025 0.1175 0.035" rpy="-${pi/2} 0 0"/>
     <axis xyz="0 0 1"/>
+    <limit effort="10000" velocity="1000" />
+	    <dynamics damping="1.0" friction="1.0" />
 </joint>
 
 <link name="wheel_rear_left">
@@ -92,14 +146,31 @@
         </geometry>
         <material name="orange"/>
     </visual>
+     <collision>
+    <geometry>
+      <cylinder length="0.055" radius="0.055"/>
+    </geometry>
+  </collision>
+
+  <inertial>
+    <mass value="0.2"/>
+    <inertia ixx="0.0001" ixy="0.0" ixz="0.0"
+             iyy="0.0001" iyz="0.0"
+             izz="0.0001"/>
+  </inertial>
 </link>
+  <gazebo reference="wheel_rear_left">
+    <material>Gazebo/Red</material>
+</gazebo>
 
 <!-- Roue arrière droite -->
 <joint name="wheel_rear_right_joint" type="continuous">
-    <parent link="chassis"/>
+    <parent link="base_link"/>
     <child link="wheel_rear_right"/>
     <origin xyz="0.025 -0.1175 0.035" rpy="${pi/2} 0 0"/>
-    <axis xyz="0 0 1"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="10000" velocity="1000" />
+	    <dynamics damping="1.0" friction="1.0" />
 </joint>
 
 <link name="wheel_rear_right">
@@ -109,7 +180,22 @@
         </geometry>
         <material name="orange"/>
     </visual>
+     <collision>
+    <geometry>
+      <cylinder length="0.055" radius="0.055"/>
+    </geometry>
+  </collision>
+
+  <inertial>
+    <mass value="0.2"/>
+    <inertia ixx="0.0001" ixy="0.0" ixz="0.0"
+             iyy="0.0001" iyz="0.0"
+             izz="0.0001"/>
+  </inertial>
 </link>
+  <gazebo reference="wheel_rear_right">
+    <material>Gazebo/Red</material>
+</gazebo>
 
 
 </robot>
